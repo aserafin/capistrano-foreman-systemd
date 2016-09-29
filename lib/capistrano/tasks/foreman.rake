@@ -61,21 +61,21 @@ namespace :foreman do
   desc "Start the application services"
   task :start do
     on roles fetch(:foreman_roles) do
-      sudo :start, fetch(:foreman_app)
+      sudo :systemctl, "start #{fetch(:foreman_app)}.target"
     end
   end
 
   desc "Stop the application services"
   task :stop do
     on roles fetch(:foreman_roles) do
-      sudo :stop, fetch(:foreman_app)
+      sudo :systemctl, "stop #{fetch(:foreman_app)}.target"
     end
   end
 
   desc "Restart the application services"
   task :restart do
     on roles fetch(:foreman_roles) do
-      sudo :restart, fetch(:foreman_app)
+      sudo :restart, "start #{fetch(:foreman_app)}.target"
     end
   end
 
