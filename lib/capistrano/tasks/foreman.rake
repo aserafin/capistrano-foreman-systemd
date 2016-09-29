@@ -32,6 +32,7 @@ namespace :foreman do
           log: fetch(:foreman_log)
         }
         options[:concurrency] = fetch(:foreman_concurrency) if fetch(:foreman_concurrency)
+        options[:concurrency] = server.properties.foreman_concurrency if server.properties.foreman_concurrency
         options[:port] = fetch(:foreman_port) if fetch(:foreman_port)
         options[:user] = fetch(:foreman_user) if fetch(:foreman_user)
 
