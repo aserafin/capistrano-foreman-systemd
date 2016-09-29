@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = 'capistrano-foreman-systemd'
-  spec.version       = '0.0.6'
+  spec.version       = '0.0.7'
   spec.authors       = ['Adrian Serafin']
   spec.email         = ['adrian@softmad.pl']
   spec.description   = %q{Foreman and systemd tasks for Capistrano 3.x}

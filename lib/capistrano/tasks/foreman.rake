@@ -75,7 +75,7 @@ namespace :foreman do
   desc "Restart the application services"
   task :restart do
     on roles fetch(:foreman_roles) do
-      sudo :restart, "start #{fetch(:foreman_app)}.target"
+      sudo :systemctl, "restart #{fetch(:foreman_app)}.target"
     end
   end
 
