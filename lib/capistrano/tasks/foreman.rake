@@ -18,8 +18,24 @@ namespace :foreman do
 
   task :setup do
     invoke :'foreman:export'
+    invoke :'foreman:enable'
     invoke :'foreman:start'
   end
+
+  desc "Enables service in systemd"
+  task :enable do
+    on roles fetch(:foreman_roles) do
+      sudo :systemctl, "enable #{fetch(:foreman_app)}.target"
+    end
+  end
+
+  desc "Disables service in systemd"
+  task :disable do
+    on roles fetch(:foreman_roles) do
+      sudo :systemctl, "disable #{fetch(:foreman_app)}.target"
+    end
+  end
+
 
   desc "Export the Procfile to another process management format"
   task :export do
@@ -36,7 +52,7 @@ namespace :foreman do
         options[:port] = fetch(:foreman_port) if fetch(:foreman_port)
         options[:user] = fetch(:foreman_user) if fetch(:foreman_user)
 
-        execute :foreman, 'export', fetch(:foreman_export_format), fetch(:foreman_export_path),
+        sudo :foreman, 'export', fetch(:foreman_export_format), fetch(:foreman_export_path),
           options.map{ |k, v| "--#{k}='#{v}'" }, fetch(:foreman_flags)
       end
     end

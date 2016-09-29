@@ -3,13 +3,13 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
-  spec.name          = 'capistrano-foreman'
-  spec.version       = '0.0.3'
-  spec.authors       = ['Johannes Gorset', 'Koen Punt']
-  spec.email         = ['jgorset@gmail.com', 'me@koen.pt']
-  spec.description   = %q{Foreman and upstart tasks for Capistrano 3.x}
-  spec.summary       = %q{Foreman and upstart tasks for Capistrano 3.x}
-  spec.homepage      = 'https://github.com/hyperoslo/capistrano-foreman'
+  spec.name          = 'capistrano-foreman-systemd'
+  spec.version       = '0.0.5'
+  spec.authors       = ['Adrian Serafin']
+  spec.email         = ['adrian@softmad.pl']
+  spec.description   = %q{Foreman and systemd tasks for Capistrano 3.x}
+  spec.summary       = %q{Foreman and systemd tasks for Capistrano 3.x}
+  spec.homepage      = 'https://github.com/aserafin/capistrano-foreman'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'capistrano', '~> 3.1'
+  spec.add_dependency 'capistrano', '~> 3.4.1'
 
   spec.add_development_dependency 'bundler', '~> 1.3'
   spec.add_development_dependency 'rake'
