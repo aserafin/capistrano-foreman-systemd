@@ -23,7 +23,7 @@ namespace :foreman do
 
   desc "Export the Procfile to another process management format"
   task :export do
-    on roles fetch(:foreman_roles) do
+    on roles fetch(:foreman_roles) do |server|
       execute :mkdir, "-p", fetch(:foreman_export_path) unless test "[ -d #{fetch(:foreman_export_path)} ]"
       within fetch(:foreman_target_path, release_path) do
 
