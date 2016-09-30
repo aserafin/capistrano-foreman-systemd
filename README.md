@@ -1,7 +1,7 @@
 # Capistrano::ForemanSystemd
 
-This is heavily based on the [capistrano-foreman]() gem but it only targets `systemd` (default init system for Ubuntu since 16.04).
-It works best with [foreman-systemd]() (fork of 0.78 version of [foreman]() gem).
+This is heavily based on the [capistrano-foreman](https://github.com/koenpunt/capistrano-foreman) gem but it only targets `systemd` (default init system for Ubuntu since 16.04).
+It works best with [foreman-systemd](https://github.com/aserafin/foreman) (fork of 0.78 version of [foreman](https://github.com/ddollar/foreman) gem).
 
 ## Installation
 
@@ -97,8 +97,8 @@ Finally you have to instruct Capistrano to run `foreman:restart` after deploy:
 You can control which process runs on which servers using server variable `foreman_systemd_concurrency`:
 
 ```ruby
-server '123.123.123.1', { roles: [:web], foreman_concurrency: 'web=1,sidekiq=1' }
-server '123.123.123.1', { roles: [:web], foreman_concurrency: 'web=1,sidekiq=0' }
+server '123.123.123.1', { roles: [:web], foreman_systemd_concurrency: 'web=1,sidekiq=1' }
+server '123.123.123.1', { roles: [:web], foreman_systemd_concurrency: 'web=1,sidekiq=0' }
 ```
 
 Finally
