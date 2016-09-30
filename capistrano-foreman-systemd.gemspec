@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['adrian@softmad.pl']
   spec.description   = %q{Foreman and systemd tasks for Capistrano 3.x}
   spec.summary       = %q{Foreman and systemd tasks for Capistrano 3.x}
-  spec.homepage      = 'https://github.com/aserafin/capistrano-foreman'
+  spec.homepage      = 'https://github.com/aserafin/capistrano-foreman-systemd'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
