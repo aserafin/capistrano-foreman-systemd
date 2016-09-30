@@ -66,21 +66,12 @@ Commands have to be executed with `root` or user with `sudo` writes because `for
 
 ## Example
 
-A typical setup would look like the following:
 
-Have a group-writeable directory under `/etc/init` for the group `deploy` (in this case I call it `sites`) to store the init scripts:
-
-```bash
-sudo mkdir /etc/init/sites
-sudo chown :deploy /etc/init/sites
-sudo chmod g+w /etc/init/sites
-```
-
-And the following configuration in `deploy.rb`:
+Configuration in `deploy.rb`:
 
 ```ruby
 # Set the app with `sites/` prefix
-set :foreman_app, -> { "sites/#{fetch(:application)}" }
+set :foreman_app, -> { fetch(:application) }
 
 # Set user to `deploy`, assuming this is your deploy user
 set :foreman_user, 'deploy'
