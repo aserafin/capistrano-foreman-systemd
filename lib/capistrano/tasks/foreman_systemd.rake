@@ -5,7 +5,7 @@ namespace :foreman_systemd do
         Configurable options are:
 
           set :foreman_systemd_roles, :all
-          set :foreman_systemd_export_format, 'upstart'
+          set :foreman_systemd_export_format, 'systemd'
           set :foreman_systemd_export_path, '/etc/init'
           set :foreman_systemd_flags, ''
           set :foreman_systemd_target_path, release_path
