@@ -18,6 +18,13 @@ namespace :foreman_systemd do
 
   task :setup do
     invoke :'foreman_systemd:export'
+
+    on roles fetch(:foreman_systemd_roles) do
+      as "root" do
+        execute :systemctl, "daemon-reload"
+      end
+    end
+
     invoke :'foreman_systemd:enable'
     invoke :'foreman_systemd:start'
   end
