@@ -5,7 +5,7 @@ namespace :foreman_systemd do
         Configurable options are:
 
           set :foreman_systemd_roles, :all
-          set :foreman_systemd_export_format, 'upstart'
+          set :foreman_systemd_export_format, 'systemd'
           set :foreman_systemd_export_path, '/etc/init'
           set :foreman_systemd_flags, ''
           set :foreman_systemd_target_path, release_path
@@ -18,6 +18,13 @@ namespace :foreman_systemd do
 
   task :setup do
     invoke :'foreman_systemd:export'
+
+    on roles fetch(:foreman_systemd_roles) do
+      as "root" do
+        execute :systemctl, "daemon-reload"
+      end
+    end
+
     invoke :'foreman_systemd:enable'
     invoke :'foreman_systemd:start'
   end
@@ -25,14 +32,18 @@ namespace :foreman_systemd do
   desc 'Enables service in systemd'
   task :enable do
     on roles fetch(:foreman_systemd_roles) do
-      sudo :systemctl, "enable #{fetch(:foreman_systemd_app)}.target"
+      as "root" do
+        execute :systemctl, "enable #{fetch(:foreman_systemd_app)}.target"
+      end
     end
   end
 
   desc 'Disables service in systemd'
   task :disable do
     on roles fetch(:foreman_systemd_roles) do
-      sudo :systemctl, "disable #{fetch(:foreman_systemd_app)}.target"
+      as "root" do
+        execute :systemctl, "disable #{fetch(:foreman_systemd_app)}.target"
+      end
     end
   end
 
@@ -52,8 +63,10 @@ namespace :foreman_systemd do
         options[:port] = fetch(:foreman_systemd_port) if fetch(:foreman_systemd_port)
         options[:user] = fetch(:foreman_systemd_user) if fetch(:foreman_systemd_user)
 
-        sudo :foreman, 'export', fetch(:foreman_systemd_export_format), fetch(:foreman_systemd_export_path),
-          options.map{ |k, v| "--#{k}='#{v}'" }, fetch(:foreman_systemd_flags)
+        as "root" do
+          execute :foreman, 'export', fetch(:foreman_systemd_export_format), fetch(:foreman_systemd_export_path),
+            options.map{ |k, v| "--#{k}='#{v}'" }, fetch(:foreman_systemd_flags)
+        end
       end
     end
   end
@@ -61,21 +74,27 @@ namespace :foreman_systemd do
   desc 'Start the application services'
   task :start do
     on roles fetch(:foreman_systemd_roles) do
-      sudo :systemctl, "start #{fetch(:foreman_systemd_app)}.target"
+      as "root" do
+        execute :systemctl, "start #{fetch(:foreman_systemd_app)}.target"
+      end
     end
   end
 
   desc 'Stop the application services'
   task :stop do
     on roles fetch(:foreman_systemd_roles) do
-      sudo :systemctl, "stop #{fetch(:foreman_systemd_app)}.target"
+      as "root" do
+        execute :systemctl, "stop #{fetch(:foreman_systemd_app)}.target"
+      end
     end
   end
 
   desc 'Restart the application services'
   task :restart do
     on roles fetch(:foreman_systemd_roles) do
-      sudo :systemctl, "restart #{fetch(:foreman_systemd_app)}.target"
+      as "root" do
+        execute :systemctl, "restart #{fetch(:foreman_systemd_app)}.target"
+      end
     end
   end
 
