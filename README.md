@@ -35,7 +35,7 @@ Configurable options, shown here with defaults:
 
 ```ruby
 set :foreman_systemd_roles, :all
-set :foreman_systemd_export_format, 'upstart'
+set :foreman_systemd_export_format, 'systemd'
 set :foreman_systemd_export_path, '/etc/init'
 set :foreman_systemd_flags, "--root=#{current_path}" # optional, default is empty string
 set :foreman_systemd_target_path, release_path
